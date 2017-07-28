@@ -1,16 +1,15 @@
 package SZPlugin.HealPlugin;
 
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffectType;
 
 public class HealPlugin extends  JavaPlugin {
 	
-	public Boolean onCommand(CommandSender cs, Command cdm, String label, String[] arg){
-		if(getCommand("healme")){
+	public boolean onCommand(CommandSender cs, Command command, String label, String[] arguments){
+		if(command.getName().equals("healme")){
 			if(cs instanceof Player){
 				Player player = (Player) cs;
 				player.setFoodLevel(20);
@@ -22,11 +21,16 @@ public class HealPlugin extends  JavaPlugin {
 				player.removePotionEffect(PotionEffectType.POISON);
 				player.removePotionEffect(PotionEffectType.WEAKNESS);
 				player.removePotionEffect(PotionEffectType.WITHER);
+				player.removePotionEffect(PotionEffectType.HUNGER);
+				player.removePotionEffect(PotionEffectType.SLOW);
+				player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
 				player.sendMessage(ChatColor.GREEN + "Du wurdest geheilt");
 			} else {
-				cs.sendMessage(ChatColor.RED + "Kein Spieler");
+				cs.sendMessage(ChatColor.RED + "Netter Versuch :P");
 			}
+			return true;
 		}
+		return false;
 	}
 
 
