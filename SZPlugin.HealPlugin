@@ -1,5 +1,8 @@
+//Plugin.yml -> https://github.com/SebastianZockt/Minecraft/blob/master/Plugins.yml
+
 package SZPlugin.HealPlugin;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -10,25 +13,32 @@ public class HealPlugin extends  JavaPlugin {
 	
 	public boolean onCommand(CommandSender cs, Command command, String label, String[] arguments){
 		if(command.getName().equals("healme")){
-			if(cs instanceof Player){
-				Player player = (Player) cs;
-				player.setFoodLevel(20);
-				player.setHealth(20.0);
-				player.setFireTicks(0);
-				player.setRemainingAir(20);
-				player.removePotionEffect(PotionEffectType.BLINDNESS);
-				player.removePotionEffect(PotionEffectType.CONFUSION);
-				player.removePotionEffect(PotionEffectType.POISON);
-				player.removePotionEffect(PotionEffectType.WEAKNESS);
-				player.removePotionEffect(PotionEffectType.WITHER);
-				player.removePotionEffect(PotionEffectType.HUNGER);
-				player.removePotionEffect(PotionEffectType.SLOW);
-				player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
-				player.sendMessage(ChatColor.GREEN + "Du wurdest geheilt");
-			} else {
-				cs.sendMessage(ChatColor.RED + "Netter Versuch :P");
-			}
-			return true;
+			 if(cs.hasPermission("SZ.Healme")){
+				if(cs instanceof Player){
+					Player player = (Player) cs;
+					player.setFoodLevel(20);
+					player.setHealth(20.0);
+					player.setFireTicks(0);
+					player.setRemainingAir(20);
+					player.removePotionEffect(PotionEffectType.BLINDNESS);
+					player.removePotionEffect(PotionEffectType.CONFUSION);
+					player.removePotionEffect(PotionEffectType.POISON);
+					player.removePotionEffect(PotionEffectType.WEAKNESS);
+					player.removePotionEffect(PotionEffectType.WITHER);
+					player.removePotionEffect(PotionEffectType.HUNGER);
+					player.removePotionEffect(PotionEffectType.SLOW);
+					player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+					player.sendMessage(ChatColor.GREEN + "Du wurdest geheilt");
+					Bukkit.getLogger().info("Healme wurde ausgeführt");
+				} else {
+					cs.sendMessage(ChatColor.RED + "Netter Versuch :P");
+					Bukkit.getLogger().info("Ein Fehler ist bei der Abfrage aufgetretten. Fehler: Person kein Spieler");
+				}
+				return true;
+			 } else {
+				 Bukkit.getLogger().info("Healme Keine Rechte");
+			 }
+			 return true;
 		}
 		return false;
 	}
