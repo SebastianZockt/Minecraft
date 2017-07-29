@@ -1,0 +1,12 @@
+name: HealPlugin
+Version: 0.1
+main: SZPlugin.HealPlugin.HealPlugin
+description: Simples Heal Plugin
+author: SebastianZ
+commands:
+	healme:
+		description: Heal me!
+		aliases: [heal]
+Permissions:
+	healme:
+		Permission: SZ.Healme
