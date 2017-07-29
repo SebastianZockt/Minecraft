@@ -36,7 +36,8 @@ public class HealPlugin extends  JavaPlugin {
 				}
 				return true;
 			 } else {
-				 Bukkit.getLogger().info("Healme Keine Rechte");
+			 	cs.sendMessage(ChatColor.RED +"Du hast keine Rechte");
+				Bukkit.getLogger().info("Healme Keine Rechte");
 			 }
 			 return true;
 		}
